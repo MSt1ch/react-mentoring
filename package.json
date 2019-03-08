@@ -1,0 +1,37 @@
+{
+  "name": "react-mentoring-task-01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "dev": "node server/express.js ./webpack.config.js --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MSt1ch/react-mentoring.git"
+  },
+  "author": "mSt1ch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MSt1ch/react-mentoring/issues"
+  },
+  "homepage": "https://github.com/MSt1ch/react-mentoring#readme",
+  "private": true,
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "react-hot-loader": "^4.3.11",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "path": "^0.12.7",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  }
+}
