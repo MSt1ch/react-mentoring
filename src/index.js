@@ -5,17 +5,6 @@ const title = 'Hello World!';
 const greeting = "Welcome aboard,";
 const name = "Stanislau Matsiyeuski";
 
-const data = [
-    { id: 1, type: "Core concepts lecture" },
-    { id: 2, type:"Webpack lecture" },
-    { id: 3, type: "Components lecture" },
-    { id: 4, type: "Testing lecture" },
-    { id: 5, type: "Flux + Redux" },
-    { id: 6, type: "Routing" },
-    { id: 7, type: "Server Side Rendering" },
-    { id: 8, type: "Useful libraries" },
-];
-
 const footerStyle = {
     position: "fixed",
     width: "100%",
@@ -67,12 +56,13 @@ class List extends React.PureComponent {
     }
 
     componentDidMount() {
-        this.setState({
-            data: data
-        })
+        fetch('/data')
+            .then(res => res.json())
+            .then(json => this.setState({
+                data: json.data
+            }))
     }
     render() {
-        console.log(this.state.data);
         return (
             <div style={ listStyle }>
                 <p>List of tasks:</p>
