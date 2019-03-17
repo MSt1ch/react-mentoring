@@ -1,12 +1,12 @@
-import headerStyle from "./headerStyle";
-import React from "react";
+import React from 'react';
+import css from './header.module.scss';
 
-const title = "Hello World!";
+const title = 'Hello World!';
 
-const Header = React.createElement(
-    "div",
-    { className: "header", style: headerStyle },
-    title
-);
+class Header extends React.Component {
+    render () {
+        return <div className={css.header}>{title}</div>;
+    }
+}
 
 export default Header;

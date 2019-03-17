@@ -1,15 +1,15 @@
-import footerStyle from "./footerStyle";
-import React from "react";
+import css from './footer.module.scss';
+import React from 'react';
 
-const name = "Stanislau Matsiyeuski";
+const name = 'Stanislau Matsiyeuski';
 
 class Footer extends React.Component {
-    render() {
+    render () {
         return (
-            <footer style={ footerStyle }>
-                <p>{ name }</p>
+            <footer className={css.footerStyle}>
+                <p>{name}</p>A
             </footer>
-        )
+        );
     }
 }
 
