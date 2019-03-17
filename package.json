@@ -7,8 +7,7 @@
       "start-front": "NODE_ENV=development  npx webpack",
       "start-server": "node server/express.js --mode development",
       "start-prod": "NODE_ENV=production webpack",
-      "test": "jest",
-      "clear": "del-cli dist"
+      "test": "jest"
   },
   "repository": {
     "type": "git",

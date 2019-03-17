@@ -68,9 +68,9 @@ module.exports = {
 					{
 						loader: 'eslint-loader',
 						options: {
-							fix: true,
+							fix: devMode,
 							configFile: path.join(__dirname, '/.eslintrc'),
-							emitWarning: true,
+							emitWarning: devMode,
 							outputReport: {
 								filePath: 'eslint-report.html',
 								formatter: require('eslint/lib/formatters/html'),
@@ -119,5 +119,5 @@ module.exports = {
 			chunkFilename: '[id].css',
 		}),
 	],
-	watch: true,
+	watch: devMode,
 };
