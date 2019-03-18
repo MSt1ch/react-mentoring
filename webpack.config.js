@@ -10,7 +10,7 @@ const CSSModuleLoader = {
 	options: {
 		modules: true,
 		sourceMap: true,
-		localIdentName: devMode ? '[local]__[hash:base64:5]' : '[hash:base64:5]',
+		localIdentName: devMode ? '[name]__[local]___[hash:base64:5]' : '[hash:base64:5]',
 	},
 };
 
@@ -50,14 +50,17 @@ module.exports = {
 		chunkFilename: '[name].bundle.js',
 	},
 	devServer: {
+		proxy: {
+			'/api': 'http://localhost:3000'
+		},
 		contentBase: path.join(__dirname, 'dist'),
 		compress: true,
-		port: 9000,
+		port: 3000,
 		watchContentBase: true,
 		progress: true,
 		hot: true,
 	},
-	devtool: 'source-map',
+	devtool: devMode ? 'source-map' : false,
 	module: {
 		rules: [
 			{
@@ -71,10 +74,7 @@ module.exports = {
 							fix: devMode,
 							configFile: path.join(__dirname, '/.eslintrc'),
 							emitWarning: devMode,
-							outputReport: {
-								filePath: 'eslint-report.html',
-								formatter: require('eslint/lib/formatters/html'),
-							},
+							formatter: require('eslint/lib/formatters/stylish')
 						},
 					},
 				],
@@ -101,7 +101,8 @@ module.exports = {
 						loader: 'css-loader',
 						options: {
 							modules: true,
-							sourceMap: devMode
+							sourceMap: devMode,
+							publicPath: __dirname + '/dist'
 						},
 					},
 				],
@@ -119,5 +120,4 @@ module.exports = {
 			chunkFilename: '[id].css',
 		}),
 	],
-	watch: devMode,
 };

@@ -4,11 +4,12 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-      "start-front": "NODE_ENV=development  npx webpack",
-      "start-server": "node server/express.js --mode development",
+      "start-front": "NODE_ENV=development webpack-dev-server --hot",
+      "start-server": "NODE_ENV=development node server/express.js",
       "start-prod": "NODE_ENV=production webpack",
-      "test": "jest"
-  },
+      "test": "jest",
+      "clean": "rm dist/bundle.js dist/bundle.js.map"
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MSt1ch/react-mentoring.git"
