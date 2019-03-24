@@ -1,0 +1,53 @@
+.itemWrap {
+  display: flex;
+  justify-content: start;
+  margin: 24px auto;
+  max-width: 960px;
+}
+
+.itemImage {
+  margin-right: 48px;
+}
+
+.itemTitle {
+  margin-top: 30px;
+  color: #E983A5;
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 200;
+}
+
+.itemVote {
+  display: inline-block;
+  color: darken(gainsboro, 10%);
+  font-weight: 200;
+  font-size: 16px;
+  border: 1px solid darken(gainsboro, 10%);
+  border-radius: 50%;
+  line-height: 40px;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.itemTag {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 200;
+  color: gainsboro;
+}
+
+.itemData {
+  margin-top: 12px;
+}
+
+.itemReleaseDate {
+  margin-right: 30px;
+}
+
+.itemOverview {
+  margin-top: 30px;
+  color: gainsboro;
+  line-height: 20px;
+}
