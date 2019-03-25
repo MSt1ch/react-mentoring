@@ -6,8 +6,7 @@ In the root directory type you need write commands:
 
 ```
 yarn
-yarn start-server
-yarn start-front
+yarn start
 ```
 
 and open [http://localhost:3000].
@@ -25,6 +24,6 @@ yarn test
 ---
 To deploy production:
 ```
-yarn clean
+yarn build-prod
 ```
 ---
