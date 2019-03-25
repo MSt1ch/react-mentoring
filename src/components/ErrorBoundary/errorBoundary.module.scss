@@ -1,0 +1,15 @@
+.errorWrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorH1 {
+  margin-top: 10px;
+  font-size: 42px;
+  color: deepskyblue;
+  font-weight: 200;
+  font-family: sans-serif;
+}

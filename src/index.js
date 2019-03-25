@@ -3,22 +3,22 @@ import ReactDOM from 'react-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Content from './components/Content';
+import ErrorBoundary from './components/ErrorBoundary';
 import css from './index.module.scss';
 
-const greeting = 'Welcome aboard,';
-const name = 'Stanislau Matsiyeuski';
 
-const App = ({ name }) => (
-    <div className="page-wrapper">
+const App = () => (
+    <>
         <Header />
-        <h2 className={css.app}>{name}</h2>
         <Content />
         <Footer />
-    </div>
+    </>
 );
 
 ReactDOM.render(
-    <App name={`${greeting} ${name}.`} />,
+    <ErrorBoundary>
+        <App className={css.app}/>
+    </ErrorBoundary>,
     document.getElementById('app')
 );
 

@@ -7,7 +7,12 @@ const path = require('path');
 module.exports = config.map(config => merge(config, {
     devServer: {
         proxy: {
-            '/api': 'http://localhost:3000'
+            '/api': {
+            	target: 'http://react-cdp-api.herokuapp.com/',
+				secure: false,
+				changeOrigin: true,
+				pathRewrite: {'^/api' : ''}
+			}
         },
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
@@ -30,7 +35,6 @@ module.exports = config.map(config => merge(config, {
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: [
-					{ loader: 'babel-loader' },
 					{
 						loader: 'eslint-loader',
 						options: {
