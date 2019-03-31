@@ -26,18 +26,18 @@ class Content extends React.PureComponent {
     render () {
         return (
             <main>
-                { this.state.data.length && <FilterSection {...this.state} />}
-                <div className={css.contentStyle}>
-                    {this.state.error && <p className={css.contentP}>No films found</p>}
+                { this.state.data.length && <FilterSection { ...this.state } />}
+                <div className={ css.contentStyle }>
+                    {this.state.error && <p className={ css.contentP }>No films found</p>}
                     <StackGrid
-                        columnWidth={300}
-                        gutterWidth={48}
-                        gutterHeight={48}
+                        columnWidth={ 300 }
+                        gutterWidth={ 48 }
+                        gutterHeight={ 48 }
                         itemComponent="div"
                     >
                         { this.state.data && this.state.data.
                             map(
-                                film => <FilmItem key={film.id} {...film} />
+                                film => <FilmItem key={ film.id } { ...film } />
                             )
                         }
                     </StackGrid>

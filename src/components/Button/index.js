@@ -22,7 +22,7 @@ const Button = ({
 }) => {
     const classList = `${active ? buttonStyles.active : ''} ${wide ? buttonStyles.wide : ''} ${extraWide ? buttonStyles.extraWide : ''} ${inverse ? buttonStyles.inverse : ''} ${transparent ? buttonStyles.transparent : ''} ${transparentActive ? buttonStyles.transparentActive : ''} ${buttonStyles.default}`;
     return (
-        <button className={classList}>
+        <button className={ classList }>
             {name}
         </button>
     );

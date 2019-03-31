@@ -5,10 +5,10 @@ import Button from '../Button';
 
 const FilterSection = ({ data }) => {
     return (
-        <div className={css.resultSectionWrap}>
-            <div className={css.resultSection}>
+        <div className={ css.resultSectionWrap }>
+            <div className={ css.resultSection }>
                 <span>{data.length} movies found</span>
-                <div className={css.resultSortBy}>
+                <div className={ css.resultSortBy }>
                     <span>Sort by:</span>
                     <Button name="release date" transparent />
                     <Button name="rating" transparentActive />

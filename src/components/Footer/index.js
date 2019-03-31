@@ -5,8 +5,8 @@ const title = 'netflixroulette';
 
 const Footer = () => {
     return (
-        <footer className={css.footerStyle}>
-            <p className={css.footerP}>{ title }</p>
+        <footer className={ css.footerStyle }>
+            <h4 className={ css.footerP }>{ title }</h4>
         </footer>
     );
 };
