@@ -17,7 +17,7 @@ const App = () => (
 
 ReactDOM.render(
     <ErrorBoundary>
-        <App className={css.app}/>
+        <App className={ css.app }/>
     </ErrorBoundary>,
     document.getElementById('app')
 );
