@@ -1,1 +1,6 @@
 /node_modules/
+__snapshots__
+coverage
+dist/bundle.js
+dist/images
+.idea/

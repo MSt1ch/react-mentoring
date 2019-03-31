@@ -12,16 +12,16 @@ const FilmDescription = ({
 							 vote_average: voteAverage
 }) => {
     return (
-        <div className={ `${css.itemWrap} ${css.headerWrap}` }>
+        <div className={ `${css.itemWrap } ${ css.headerWrap }` }>
             <img className={ css.itemImage } src={ posterPath } alt={ title } height={ 450 }/>
             <div >
-                <h3 className={ css.itemTitle }>{title} <span className={ css.itemVote }>{voteAverage}</span></h3>
-                <p className={ css.itemTag }>{tagline}</p>
+                <h3 className={ css.itemTitle }>{ title } <span className={ css.itemVote }>{ voteAverage }</span></h3>
+                <p className={ css.itemTag }>{ tagline }</p>
                 <div className={ css.itemData }>
-                    <span className={ css.itemReleaseDate }>{releaseDate && releaseDate.slice(0, 4)}</span>
-                    <span >{runtime} min</span>
+                    <span className={ css.itemReleaseDate }>{ releaseDate && releaseDate.slice(0, 4) }</span>
+                    <span >{ runtime } min</span>
                 </div>
-                <p className={ css.itemOverview }>{overview}</p>
+                <p className={ css.itemOverview }>{ overview }</p>
             </div>
         </div>
     );
