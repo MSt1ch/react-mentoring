@@ -7,7 +7,10 @@
     "start": "NODE_ENV=development webpack-dev-server --hot --config webpack.dev.js",
     "build-prod": "NODE_ENV=production webpack --config webpack.prod.js",
     "test": "jest",
-    "clean": "rm dist/bundle.js dist/bundle.js.map"
+    "test:watch": "jest --watch",
+    "clean": "rm dist/bundle.js dist/bundle.js.map",
+    "coverage": "jest --env=jsdom --coverage",
+    "cypress": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -29,11 +32,14 @@
     "babel-loader": "^8.0.4",
     "css-loader": "^2.1.1",
     "del-cli": "^1.1.0",
-    "eslint": "^5.15.2",
+    "eslint": "^5.16.0",
     "eslint-config-react": "^1.1.7",
     "eslint-loader": "^2.1.2",
+    "eslint-plugin-cypress": "^2.2.1",
+    "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-react": "^7.12.4",
     "file-loader": "^3.0.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^24.5.0",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
@@ -41,6 +47,7 @@
     "prettier": "1.16.4",
     "prop-types": "^15.7.2",
     "react-hot-loader": "^4.3.11",
+    "react-test-renderer": "^16.8.6",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.2",
@@ -51,6 +58,8 @@
   },
   "dependencies": {
     "autoprefixer": "^9.5.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
     "http-proxy-middleware": "^0.19.1",
     "path": "^0.12.7",
     "react": "^16.8.4",
@@ -60,5 +69,12 @@
     "react-stack-grid": "^0.7.1",
     "redux": "^4.0.1",
     "save": "^2.3.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/setupTests.js"
   }
 }

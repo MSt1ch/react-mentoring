@@ -1,10 +1,11 @@
 {
   "parser": "babel-eslint",
-  "extends": ["react", "plugin:jest/recommended"],
+  "extends": ["react", "plugin:jest/recommended", "plugin:cypress/recommended"],
   "env": {
     "browser": true,
     "node": true,
-    "jest/globals": true
+    "jest/globals": true,
+    "cypress/globals": true
   },
   "settings": {
     "react": {
@@ -28,5 +29,6 @@
     "no-tralling-spaces": 0
     }}]
   },
-  "plugins": ["jest"]
+  "plugins": ["jest", "cypress"]
+
 }
