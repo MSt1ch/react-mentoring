@@ -20,7 +20,14 @@ To start test:
 ```
 yarn test 
 ```
-
+To start cypress:
+```
+yarn cypress 
+```
+To see coverage:
+```
+yarn coverage 
+```
 ---
 To deploy production:
 ```
