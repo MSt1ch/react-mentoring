@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Content from './index';
-
+import { fetchFilmDescription } from '../../actions';
 
 describe('Content', () => {
     const props = {
@@ -20,7 +20,8 @@ describe('Content', () => {
                 vote_average: 10,
                 vote_count: 3,
             }
-        ]
+        ],
+        fetchFilmDescription: fetchFilmDescription
     };
     it('should be render content component', () => {
         const component = shallow(<Content { ...props } />);

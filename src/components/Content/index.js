@@ -1,43 +1,30 @@
 import css from './content.module.scss';
 import React from 'react';
+import { connect } from 'react-redux';
 import StackGrid from "react-stack-grid";
 import FilmItem from '../FilmItem';
 import FilterSection from '../FilterSection';
+import PropTypes from 'prop-types';
+import { fetchFilmDescription } from '../../actions';
 
-class Content extends React.PureComponent {
-    constructor () {
-        super();
-        this.state = {
-            data: [],
-            error: false
-        };
-    }
-
-    componentDidMount () {
-        fetch('http://react-cdp-api.herokuapp.com/movies?limit=9')
-            .then(res => res.json())
-            .then(json =>
-                this.setState({
-                    data: json.data
-                })
-            ).catch((error) => this.setState({ error: !this.state.error }));
-    }
-
+class Content extends React.Component {
     render () {
-        return (
+        const { data, fetchFilmDescription } = this.props;
+         return (
             <main>
-                { this.state.data.length && <FilterSection { ...this.state } />}
+                <FilterSection { ...this.props } />
                 <div className={ css.contentStyle }>
-                    {this.state.error && <p className={ css.contentP }>No films found</p>}
+                    {!data || data.length === 0 && <p className={ css.contentP }>No films found</p>}
                     <StackGrid
                         columnWidth={ 300 }
                         gutterWidth={ 48 }
                         gutterHeight={ 48 }
                         itemComponent="div"
+                        monitorImagesLoaded
                     >
-                        { this.state.data && this.state.data.
+                        { data && data.
                             map(
-                                film => <FilmItem key={ film.id } { ...film } />
+                                film => <FilmItem key={ film.id } { ...film } fetchFilmDescription={ fetchFilmDescription } />
                             )
                         }
                     </StackGrid>
@@ -48,4 +35,22 @@ class Content extends React.PureComponent {
     }
 }
 
-export default Content;
+const mapStateToProps = state => {
+    return {
+        data: state.content.filmsData.data,
+        total: state.content.filmsData.total
+
+    };
+};
+
+const mapDispatchToProps = {
+    fetchFilmDescription
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Content);
+
+Content.propTypes = {
+    total: PropTypes.number,
+    data: PropTypes.array,
+    fetchFilmDescription: PropTypes.func
+};

@@ -16,6 +16,17 @@
   }
 }
 
+.filmImageWrap:hover {
+  cursor: pointer;
+}
+
+.filmImageWrap {
+  img{
+    width: 300px;
+  }
+  
+}
+
 .filmDescription {
   padding: 0 6px 12px;
 }

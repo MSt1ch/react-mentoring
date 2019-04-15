@@ -15,16 +15,6 @@ class Header extends React.Component {
         };
     }
 
-    componentDidMount () {
-        fetch('http://react-cdp-api.herokuapp.com/movies/338970')
-            .then(res => res.json())
-            .then(json =>
-                this.setState({
-                    data: json,
-                    isReceive: !this.state.isReceive
-                })
-            );
-    }
     render () {
         return (
             <header className={ css.header }>
@@ -35,7 +25,7 @@ class Header extends React.Component {
                     </div>
                     <FormSearch />
                 </div>
-                <FilmDescription { ...this.state.data } />
+            <FilmDescription/>
             </header>
         );
     }

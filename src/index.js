@@ -5,7 +5,12 @@ import Footer from './components/Footer';
 import Content from './components/Content';
 import ErrorBoundary from './components/ErrorBoundary';
 import css from './index.module.scss';
+import { Provider } from 'react-redux';
+import configureStore from './configureStore';
+import registerServiceWorker from './registerServiceWorker';
 
+
+const store = configureStore();
 
 const App = () => (
     <>
@@ -16,10 +21,14 @@ const App = () => (
 );
 
 ReactDOM.render(
-    <ErrorBoundary>
-        <App className={ css.app }/>
-    </ErrorBoundary>,
+    <Provider store={ store }>
+        <ErrorBoundary>
+            <App className={ css.app }/>
+        </ErrorBoundary>
+    </Provider>,
     document.getElementById('app')
 );
 
 module.hot.accept();
+
+registerServiceWorker();
