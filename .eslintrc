@@ -5,11 +5,19 @@
     "browser": true,
     "node": true,
     "jest/globals": true,
-    "cypress/globals": true
+    "cypress/globals": true,
+    "es6": true
   },
   "settings": {
     "react": {
       "version": "detect"
+    }
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
     }
   },
   "rules":{

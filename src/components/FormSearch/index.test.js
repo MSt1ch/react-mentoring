@@ -3,8 +3,15 @@ import { shallow } from 'enzyme';
 import InputSearch from './index';
 
 describe('Input search', () => {
-    it('should be render input search component', () => {
-        const component = shallow(<InputSearch/>);
+    it('should be render form component', () => {
+        const props = {
+            value: 'text',
+            title: 'text',
+            genre: 'type_genre',
+            activeSearchBy: 'type_search',
+            activeSortBy: 'type_sort'
+        };
+        const component = shallow(<InputSearch { ...props }/>);
         expect(component).toMatchSnapshot();
     });
 });

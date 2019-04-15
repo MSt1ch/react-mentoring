@@ -18,11 +18,13 @@ const Button = ({
     active,
     inverse,
     transparent,
-    transparentActive
+    transparentActive,
+    type,
+    onClick
 }) => {
     const classList = `${active ? buttonStyles.active : ''} ${wide ? buttonStyles.wide : ''} ${extraWide ? buttonStyles.extraWide : ''} ${inverse ? buttonStyles.inverse : ''} ${transparent ? buttonStyles.transparent : ''} ${transparentActive ? buttonStyles.transparentActive : ''} ${buttonStyles.default}`;
     return (
-        <button className={ classList }>
+        <button className={ classList } type={ type } onClick={ onClick }>
             {name}
         </button>
     );
@@ -37,5 +39,6 @@ Button.propTypes = {
     active: PropTypes.bool,
     inverse: PropTypes.bool,
     transparent: PropTypes.bool,
-    transparentActive: PropTypes.bool
+    transparentActive: PropTypes.bool,
+    type: PropTypes.string
 };
