@@ -5,9 +5,13 @@ import StackGrid from "react-stack-grid";
 import FilmItem from '../FilmItem';
 import FilterSection from '../FilterSection';
 import PropTypes from 'prop-types';
-import { fetchFilmDescription } from '../../actions';
+import { fetchFilmDescription, fetchFilmsData } from '../../actions';
 
 class Content extends React.Component {
+    componentDidMount () {
+        this.props.fetchFilmsData(null, this.props.activeSearchBy, this.props.activeSortBy);
+    }
+
     render () {
         const { data, fetchFilmDescription } = this.props;
          return (
@@ -38,13 +42,15 @@ class Content extends React.Component {
 const mapStateToProps = state => {
     return {
         data: state.content.filmsData.data,
-        total: state.content.filmsData.total
-
+        total: state.content.filmsData.total,
+        activeSearchBy: state.search.activeSearchBy,
+        activeSortBy: state.sort.activeSortBy
     };
 };
 
 const mapDispatchToProps = {
-    fetchFilmDescription
+    fetchFilmDescription,
+    fetchFilmsData
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
@@ -52,5 +58,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Content);
 Content.propTypes = {
     total: PropTypes.number,
     data: PropTypes.array,
-    fetchFilmDescription: PropTypes.func
+    activeSearchBy: PropTypes.string,
+    activeSortBy: PropTypes.string,
+    fetchFilmDescription: PropTypes.func,
+    fetchFilmsData: PropTypes.func
 };
