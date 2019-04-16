@@ -33,7 +33,9 @@ function receiveFilmsDataError (error) {
 export function fetchFilmsData (film, activeSearchBy, activeSortBy) {
     return dispatch => {
         dispatch(requestFilmsData());
-        return fetch(`https://reactjs-cdp.herokuapp.com/movies?sortBy=${activeSortBy}&sortOrder=desc&search=${film}&searchBy=${activeSearchBy}&limit=50`)
+        return fetch(film ?
+            `https://reactjs-cdp.herokuapp.com/movies?sortBy=${activeSortBy}&sortOrder=desc&search=${film}&searchBy=${activeSearchBy}&limit=50` :
+            `https://reactjs-cdp.herokuapp.com/movies?sortBy=${activeSortBy}&sortOrder=desc&searchBy=${activeSearchBy}&limit=50`)
             .then(res => res.json())
             .then(json => dispatch(receiveFilmsData(json)))
             .catch(error => dispatch(receiveFilmsDataError(error)));
