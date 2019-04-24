@@ -3,8 +3,10 @@ import css from './formSearch.module.scss';
 import InputSearch from '../InputSearch';
 import Button from '../Button';
 import { connect } from 'react-redux';
-import { setSearchText, fetchFilmsData, setSearchByText } from '../../actions';
+import { setSearchText, fetchFilmsData, setSearchByText } from '../../actions/actions';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 const textCategory = 'search by';
 
@@ -14,12 +16,21 @@ class FormSearch extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
+    componentDidMount () {
+        const queryParams = queryString.parse(this.props.location.search);
+        let { filmName } = queryParams;
+
+        if (queryParams.filmName) {
+            this.props.setSearchText(filmName);
+        }
+    }
+
     handleClick (text) {
         this.props.setSearchByText(text);
     }
 
     render () {
-        const { title, genre, value, activeSearchBy, activeSortBy, setSearchText } = this.props;
+        const { title, genre, value, activeSearchBy, activeSortBy, setSearchText, fetchFilmsData, history } = this.props;
         return (
         <form
             className={ css.searchWrap }
@@ -27,7 +38,11 @@ class FormSearch extends React.Component {
                 e => {
                     e.preventDefault();
                     if (value !== '') {
-                        this.props.fetchFilmsData(value, activeSearchBy, activeSortBy);
+                        fetchFilmsData(value, activeSearchBy, activeSortBy);
+                        history.push("/search");
+                        history.push({
+                            search: `filmName=${value}&searchBy=${activeSearchBy}&sortBy=${activeSortBy}`
+                        });
                     }
                 }
             }
@@ -59,11 +74,11 @@ class FormSearch extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        value: state.search.value,
-        title: state.search.title,
-        genre: state.search.genre,
-        activeSearchBy: state.search.activeSearchBy,
-        activeSortBy: state.sort.activeSortBy
+        value: state.content.value,
+        title: state.content.title,
+        genre: state.content.genre,
+        activeSearchBy: state.content.activeSearchBy,
+        activeSortBy: state.content.activeSortBy
     };
 };
 
@@ -73,7 +88,7 @@ const mapDispatchToProps = {
     setSearchByText
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormSearch);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FormSearch));
 
 FormSearch.propTypes = {
     value: PropTypes.string,
@@ -83,5 +98,7 @@ FormSearch.propTypes = {
     fetchFilmsData: PropTypes.func,
     setSearchByText: PropTypes.func,
     activeSearchBy: PropTypes.string,
-    activeSortBy: PropTypes.string
+    activeSortBy: PropTypes.string,
+    history: PropTypes.object,
+    location: PropTypes.object
 };

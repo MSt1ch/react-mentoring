@@ -1,6 +1,7 @@
 import React from 'react';
 import css from './filmItem.module.scss';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class FilmItem extends React.Component {
     constructor (props) {
@@ -11,15 +12,20 @@ class FilmItem extends React.Component {
 
     handleClick (id) {
         this.props.fetchFilmDescription(id);
+        this.props.fetchFilmsData(null, 'genre', this.props.activeSortBy, this.props.genres);
     }
 
     render () {
         const { title, poster_path: posterPath, release_date: releaseDate, genres, id } = this.props;
         return (
             <div className={ css.filmItem }>
-                <div className={ css.filmImageWrap } onClick={ () => this.handleClick(id) }>
+                <Link
+                    to={ { pathname: `/film/${id}` } }
+                    className={ css.filmImageWrap }
+                    onClick={ () => this.handleClick(id) }
+                >
                     <img src={ posterPath } alt={ title } />
-                </div>
+                </Link>
                 <div className={ css.filmDescription }>
                     <div className={ css.filmData }>
                         <span className={ css.filmTitle }>{ title }</span>
@@ -40,5 +46,7 @@ FilmItem.propTypes = {
     release_date: PropTypes.string,
     genres: PropTypes.array,
     id: PropTypes.number,
-    fetchFilmDescription: PropTypes.func
+    fetchFilmDescription: PropTypes.func,
+    fetchFilmsData: PropTypes.func,
+    activeSortBy: PropTypes.string
 };

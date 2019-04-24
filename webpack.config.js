@@ -1,5 +1,6 @@
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -43,7 +44,7 @@ module.exports = [
         entry: './src/index.js',
         mode: 'development',
         output: {
-            path: __dirname + '/dist',
+            path: path.resolve(__dirname, 'dist'),
             publicPath: '/',
             filename: 'bundle.js',
             chunkFilename: '[name].bundle.js'
@@ -83,7 +84,7 @@ module.exports = [
                             options: {
                                 modules: true,
                                 sourceMap: devMode,
-                                publicPath: __dirname + '/dist'
+                                publicPath: path.resolve(__dirname, 'dist')
                             }
                         }
                     ]
