@@ -6,20 +6,12 @@ const path = require('path');
 
 module.exports = config.map(config => merge(config, {
     devServer: {
-        proxy: {
-            '/api': {
-            	target: 'http://react-cdp-api.herokuapp.com/',
-				secure: false,
-				changeOrigin: true,
-				pathRewrite: {'^/api' : ''}
-			}
-        },
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: 3000,
         watchContentBase: true,
-        progress: true,
-        hot: true
+		hot: true,
+		historyApiFallback: true
     },
     devtool: 'source-map',
     plugins: [

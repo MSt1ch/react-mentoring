@@ -15,9 +15,9 @@ export default function searchFilmDescription (
         case REQUEST_FILM_DESCRIPTION:
             return { ...state, isFetching: true };
         case RECEIVE_FILM_DESCRIPTION:
-            return { ...state, filmDescriptionData: action.payload, isFetching: false };
+            return { ...state, filmDescriptionData: action.similarFilm, isFetching: false };
         case RECEIVE_FILM_DESCRIPTION_ERROR:
-            return { ...state, filmDescriptionData: action.payload, isFetching: false };
+            return { ...state, filmDescriptionData: action.errror, isFetching: false };
         default:
             return state;
     }

@@ -1,4 +1,4 @@
-import * as types from './constants/actionTypes';
+import * as types from '../constants/actionTypes';
 import * as actions from './actions';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
@@ -13,19 +13,19 @@ describe('should tests actions', () => {
     it('should change search text', () => {
         expect(
             actions.setSearchText(text)
-        ).toEqual({ type: types.CHANGE_SEARCH_DATA, payload: text });
+        ).toEqual({ type: types.CHANGE_SEARCH_DATA, text });
     });
 
     it('should change searchBy text', () => {
         expect(
             actions.setSearchByText(text)
-        ).toEqual({ type: types.CHANGE_SEARCHBY_PARAMETER, payload: text });
+        ).toEqual({ type: types.CHANGE_SEARCHBY_PARAMETER, textSearchBy: text });
     });
 
     it('should change sortBy text', () => {
         expect(
             actions.setSortByText(text)
-        ).toEqual({ type: types.CHANGE_SORTBY_PARAMETER, payload: text });
+        ).toEqual({ type: types.CHANGE_SORTBY_PARAMETER, textSortBy: text });
     });
 
     it('Should swith a boolean to let us know fetching started', () => {
@@ -52,7 +52,7 @@ describe('async actions', () => {
             { type: types.REQUEST_FILM_DESCRIPTION },
             {
                 type: types.RECEIVE_FILM_DESCRIPTION,
-                payload: mockResult
+                similarFilm: mockResult
             }
         ];
 
@@ -73,15 +73,15 @@ describe('async actions', () => {
             { type: types.REQUEST_FILMSDATA },
             {
                 type: types.RECEIVE_FILMSDATA,
-                payload: mockFilmsResult
+                similarFilms: mockFilmsResult
             }
         ];
 
         const store = mockStore({ payload: {} });
 
-        return store.dispatch(actions.fetchFilmsData(film, activeSearchBy, activeSortBy)).then(data =>{
+        return store.dispatch(actions.fetchFilmsData(film, activeSearchBy, activeSortBy)).then(data => {
             const dispatchedActions = store.getActions();
             expect(dispatchedActions).toEqual(expectedActions);
-        })
+        });
     });
 });

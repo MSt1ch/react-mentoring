@@ -7,8 +7,10 @@ import {
     CHANGE_SORTBY_PARAMETER,
     REQUEST_FILM_DESCRIPTION,
     RECEIVE_FILM_DESCRIPTION,
-    RECEIVE_FILM_DESCRIPTION_ERROR
-} from './constants/actionTypes';
+    RECEIVE_FILM_DESCRIPTION_ERROR,
+    RESET_FILMSDATA,
+    RESET_SEARCH_DATA
+} from '../constants/actionTypes';
 
 export function requestFilmsData () {
     return {
@@ -16,25 +18,38 @@ export function requestFilmsData () {
     };
 }
 
-function receiveFilmsData (json) {
+function receiveFilmsData (similarFilms) {
     return {
         type: RECEIVE_FILMSDATA,
-        payload: json
+        similarFilms
     };
 }
 
 function receiveFilmsDataError (error) {
     return {
         type: RECEIVE_FILMSDATA_ERROR,
-        payload: error
+        error
     };
 }
 
-export function fetchFilmsData (film, activeSearchBy, activeSortBy) {
+export function fetchFilmsData (film, activeSearchBy, activeSortBy, filter) {
     return dispatch => {
         dispatch(requestFilmsData());
-        return fetch(film ?
-            `https://reactjs-cdp.herokuapp.com/movies?sortBy=${activeSortBy}&sortOrder=desc&search=${film}&searchBy=${activeSearchBy}&limit=50` :
+        if (film) {
+            return fetch(
+                `https://reactjs-cdp.herokuapp.com/movies?sortBy=${activeSortBy}&sortOrder=desc&search=${film}&searchBy=${activeSearchBy}&limit=50`)
+                .then(res => res.json())
+                .then(json => dispatch(receiveFilmsData(json)))
+                .catch(error => dispatch(receiveFilmsDataError(error)));
+        }
+        if (filter) {
+            return fetch(
+                `https://reactjs-cdp.herokuapp.com/movies?sortBy=${activeSortBy}&sortOrder=desc&searchBy=${activeSearchBy}&filter=${filter}&limit=50`)
+                .then(res => res.json())
+                .then(json => dispatch(receiveFilmsData(json)))
+                .catch(error => dispatch(receiveFilmsDataError(error)));
+        }
+        return fetch(
             `https://reactjs-cdp.herokuapp.com/movies?sortBy=${activeSortBy}&sortOrder=desc&searchBy=${activeSearchBy}&limit=50`)
             .then(res => res.json())
             .then(json => dispatch(receiveFilmsData(json)))
@@ -42,19 +57,29 @@ export function fetchFilmsData (film, activeSearchBy, activeSortBy) {
     };
 }
 
+export const resetFilmsData = () => ({
+    type: RESET_FILMSDATA,
+    similarFilms: {}
+});
+
 export const setSearchText = text => ({
     type: CHANGE_SEARCH_DATA,
-    payload: text
+    text
 });
 
-export const setSearchByText = text => ({
+export const resetSearchText = () => ({
+    type: RESET_SEARCH_DATA,
+    text: ''
+});
+
+export const setSearchByText = textSearchBy => ({
     type: CHANGE_SEARCHBY_PARAMETER,
-    payload: text
+    textSearchBy
 });
 
-export const setSortByText = text => ({
+export const setSortByText = textSortBy => ({
     type: CHANGE_SORTBY_PARAMETER,
-    payload: text
+    textSortBy
 });
 
 export function requestFilmDescription () {
@@ -63,17 +88,17 @@ export function requestFilmDescription () {
     };
 }
 
-function receiveFilmDescription (json) {
+function receiveFilmDescription (similarFilm) {
     return {
         type: RECEIVE_FILM_DESCRIPTION,
-        payload: json
+        similarFilm
     };
 }
 
 function receiveFilmDescriptionError (error) {
     return {
         type: RECEIVE_FILM_DESCRIPTION_ERROR,
-        payload: error
+        error
     };
 }
 

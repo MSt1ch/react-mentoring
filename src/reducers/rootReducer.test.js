@@ -1,6 +1,4 @@
 import * as types from '../constants/actionTypes';
-import inputSearch from '../reducers/inputSearch';
-import sort from '../reducers/sort';
 import searchFilmDescription from '../reducers/searchFilmDescription';
 import searchFilmsData from '../reducers/searchFilmsData';
 
@@ -8,7 +6,14 @@ import searchFilmsData from '../reducers/searchFilmsData';
 describe('searchFilmsData reducer tests', () => {
     const searchFilmsDataState = {
         isFetching: false,
-        filmsData: {}
+        filmsData: {},
+        voteAverage: 'vote_average',
+        releaseDate: 'release_date',
+        activeSortBy: 'vote_average',
+        value: '',
+        title: 'title',
+        genre: 'genre',
+        activeSearchBy: 'title'
     };
 
     it('should set initial state for searchFilmsData', () => {
@@ -50,6 +55,11 @@ describe('searchFilmsData reducer tests', () => {
 
 describe('inputSearch reducer tests', () => {
     const inputSearchState = {
+        isFetching: false,
+        filmsData: {},
+        voteAverage: 'vote_average',
+        releaseDate: 'release_date',
+        activeSortBy: 'vote_average',
         value: '',
         title: 'title',
         genre: 'genre',
@@ -58,17 +68,17 @@ describe('inputSearch reducer tests', () => {
 
     it('should set initial state for inputSearch', () => {
         expect(
-            inputSearch(undefined, { type: undefined })
+            searchFilmsData(undefined, { type: undefined })
         ).toEqual(inputSearchState);
     });
 
     it('should change search text', () => {
         const text = 'search text';
         expect(
-            inputSearch({},
+            searchFilmsData({},
                 {
                     type: types.CHANGE_SEARCH_DATA,
-                    payload: text
+                    text
                 })
         ).toEqual({ value: text });
     });
@@ -76,10 +86,10 @@ describe('inputSearch reducer tests', () => {
     it('should change searchBy parameter', () => {
         const parameter = 'name';
         expect(
-            inputSearch({},
+            searchFilmsData({},
                 {
                     type: types.CHANGE_SEARCHBY_PARAMETER,
-                    payload: parameter
+                    textSearchBy: parameter
                 })
         ).toEqual({ activeSearchBy: parameter });
     });
@@ -87,14 +97,20 @@ describe('inputSearch reducer tests', () => {
 
 describe('sort reducer tests', () => {
     const sortState = {
+        isFetching: false,
+        filmsData: {},
         voteAverage: 'vote_average',
         releaseDate: 'release_date',
-        activeSortBy: 'vote_average'
+        activeSortBy: 'vote_average',
+        value: '',
+        title: 'title',
+        genre: 'genre',
+        activeSearchBy: 'title'
     };
 
     it('should set initial state for sort', () => {
         expect(
-            sort(undefined,
+            searchFilmsData(undefined,
                 {
                     type: undefined
                 })
@@ -104,10 +120,10 @@ describe('sort reducer tests', () => {
     it('should change sortBy parameter', () => {
         const parameter = 'rating';
         expect(
-            sort({},
+            searchFilmsData({},
                 {
                     type: types.CHANGE_SORTBY_PARAMETER,
-                    payload: parameter
+                    textSortBy: parameter
                 })
         ).toEqual({ activeSortBy: parameter });
     });

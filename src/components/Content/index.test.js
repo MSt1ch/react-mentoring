@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Content from './index';
-import { fetchFilmDescription } from '../../actions';
+import { fetchFilmDescription } from '../../actions/actions';
 
 describe('Content', () => {
     const props = {
