@@ -18,7 +18,7 @@ export default function searchFilmsData (
         activeSortBy: 'vote_average',
         value: '',
         title: 'title',
-        genre: 'genre',
+        genre: 'genres',
         activeSearchBy: 'title'
     },
     action

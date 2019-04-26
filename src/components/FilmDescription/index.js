@@ -6,9 +6,12 @@ import { fetchFilmDescription } from '../../actions/actions';
 import { withRouter } from 'react-router-dom';
 
 class FilmDescription extends React.PureComponent {
-    componentDidMount () {
-        const { id } = this.props.match.params;
-        this.props.fetchFilmDescription(id);
+    state = { id: null };
+    static getDerivedStateFromProps (nextProps, prevState) {
+        if (prevState.id !== nextProps.match.params.id) {
+            nextProps.fetchFilmDescription(nextProps.match.params.id);
+        }
+        return { id: nextProps.match.params.id };
     }
 
     render () {

@@ -103,11 +103,15 @@ function receiveFilmDescriptionError (error) {
 }
 
 export function fetchFilmDescription (id) {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(requestFilmDescription());
         return fetch(`http://react-cdp-api.herokuapp.com/movies/${id}`)
             .then(res => res.json())
-            .then(json => dispatch(receiveFilmDescription(json)))
-            .catch(error => dispatch(receiveFilmDescriptionError(error)));
+            .then(similarFilm => {
+                dispatch(receiveFilmDescription(similarFilm));
+                return similarFilm.genres;
+            })
+            .catch(error => dispatch(receiveFilmDescriptionError(error)))
+            .then(genres => dispatch(fetchFilmsData(null, getState().content.activeSearchBy, 'genres', genres)));
     };
 }

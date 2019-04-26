@@ -4,17 +4,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class FilmItem extends React.Component {
-    constructor (props) {
-        super(props);
-
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick (id) {
-        this.props.fetchFilmDescription(id);
-        this.props.fetchFilmsData(null, 'genre', this.props.activeSortBy, this.props.genres);
-    }
-
     render () {
         const { title, poster_path: posterPath, release_date: releaseDate, genres, id } = this.props;
         return (
@@ -22,7 +11,6 @@ class FilmItem extends React.Component {
                 <Link
                     to={ { pathname: `/film/${id}` } }
                     className={ css.filmImageWrap }
-                    onClick={ () => this.handleClick(id) }
                 >
                     <img src={ posterPath } alt={ title } />
                 </Link>
