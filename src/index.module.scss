@@ -3,3 +3,9 @@
 	font-family: sans-serif;
 	height: 100%;
 }
+:global {
+	body {
+		margin: 0;
+		padding: 0;
+	}
+}
