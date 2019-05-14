@@ -9,8 +9,8 @@ import { fetchFilmDescription, fetchFilmsData } from '../../actions/actions';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 
-class Content extends React.Component {
-    componentDidMount () {
+class Content extends React.PureComponent {
+    componentWillMount () {
         const queryParams = queryString.parse(this.props.location.search);
         let { filmName, sortBy = this.props.activeSearchBy, searchBy = this.props.activeSearchBy } = queryParams;
 
